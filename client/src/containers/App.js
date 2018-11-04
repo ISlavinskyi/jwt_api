@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import TopBar from '../components/layouts/TopBar/TopBar';
+import Header from '../components/Header/Header';
 
 import './App.css';
 
@@ -9,7 +10,7 @@ class App extends Component {
         return (
             <div className="App">
                 <TopBar/>
-                Hello from app
+                <Header/>
             </div>
         );
     }
