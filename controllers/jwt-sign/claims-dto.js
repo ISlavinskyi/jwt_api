@@ -1,8 +1,11 @@
+const {clearObj} = require('../../utils/utils')
+
 module.exports = class {
-    constructor({issuer = null, subject = null, audience = null, notBefore = null}) {
+    constructor({issuer = null, subject = null, audience = null, auxiliary = null}) {
         this.iss = issuer;
         this.sub = subject;
         this.aud = audience;
-        this.nbf = notBefore;
+        this.aux = clearObj(auxiliary);
     }
+
 };

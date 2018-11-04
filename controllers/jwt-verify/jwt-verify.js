@@ -1,11 +1,16 @@
 const jwt = require('jsonwebtoken');
 
-const jwtVerify = async ({token}) => {
+const jwtVerify = async ({token = null, secret = null, claims = null}) => {
     try {
-        const decode = await jwt.verify(token,'secret');
-        return decode;
+        if (token !== null && secret != null) {
+            const verify = await jwt.verify(token, secret, {...claims});
+            return {isValid: true};
+        } else {
+            throw new Error('secret and token are required options');
+        }
+
     } catch (e) {
-        throw new Error(e.message);
+        return {isValid:false, reason: e.message}
     }
 };
 
