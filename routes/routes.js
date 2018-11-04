@@ -1,5 +1,5 @@
 const express = require('express'),
-    {jwtSign, jwtVerify} = require('../controllers/index');
+    {jwtSign, jwtVerify, jwtDecode} = require('../controllers/index');
 
 const routes = () => {
     const router = express.Router();
@@ -21,6 +21,16 @@ const routes = () => {
                 res.status(200).send(status);
             } catch (e) {
                 res.status(401).json({error: e.message});
+            }
+        });
+
+    router.route('/decode')
+        .post(async(req, res) => {
+            try {
+                const token = await jwtDecode(req.body);
+                res.status(200).send(token);
+            } catch (e) {
+                res.status(500).json({error: e.message});
             }
         });
 
