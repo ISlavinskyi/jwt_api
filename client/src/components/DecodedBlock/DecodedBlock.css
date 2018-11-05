@@ -1,0 +1,24 @@
+.DecodedBlock {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+    width: 1000px;
+}
+
+.DecodedHeader {
+    width: 310px;
+    height: 330px;
+    border: 1px solid #eceeef;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+}
+
+.HeaderString {
+    margin: 20px auto;
+    width: 260px;
+    height: 240px;
+    border: 1px solid #dddfe0;
+    border-radius: 10px;
+    outline: none;
+    resize: none;
+}
