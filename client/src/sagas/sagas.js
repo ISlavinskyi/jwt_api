@@ -5,19 +5,24 @@ export function* watcherSaga() {
     yield takeLatest('API_CALL_DECODE', decodeSaga);
 }
 
-function fetchData(url, method = 'get', headers = {} ) {
+function fetchData(url, method = 'get',  data = {}, headers = {}) {
     return axios({
         method: method,
-        headers: headers,
-        url: url
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        url: url,
+        data: data
     });
 }
 
 function* decodeSaga({token}) {
     try {
-        console.log(token)
+        const {data:tokenObj} = yield fetchData('http://localhost:3001/api/decode/', 'post', {token: token});
+
+        yield put({type: 'API_CALL_DECODE_SUCCESS', tokenObj});
     } catch (error) {
-        
+        yield put({type: 'API_CALL_FAILURE', error});
     }
 }
 
