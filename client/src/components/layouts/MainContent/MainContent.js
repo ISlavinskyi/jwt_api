@@ -26,6 +26,18 @@ class MainContent extends Component {
         onRequestDecode(token);
     };
 
+    onDecodeChangeHandler = (event) => {
+        const signature = event.target.value;
+        const {onSignatureChange} = this.props;
+        let secret;
+        try {
+            secret = JSON.parse(signature);
+        } catch (e) {
+            secret = {secret: 'wrong input'};
+        }
+        onSignatureChange(secret);
+    };
+
     render() {
 
         return (
@@ -44,9 +56,12 @@ class MainContent extends Component {
                     />
                     <DecodedBlock
                         title='Payload Data'
+                        payload={this.props.tokenObj}
                     />
                     <DecodedBlock
                         title='Signature Key'
+                        payload={this.props.signature}
+                        onDecodeChange={this.onDecodeChangeHandler}
                     />
                 </div>
                 <div className='CheckBlock'>
@@ -63,6 +78,7 @@ class MainContent extends Component {
 const mapStateToProps = state => {
     return {
         tokenObj: state.tokenObj,
+        signature: state.signature,
         error: state.error
     };
 };
@@ -70,6 +86,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onRequestDecode: (token) => dispatch({type: "API_CALL_DECODE", token}),
+        onSignatureChange: (signature) => dispatch({type: "ON_SIGNATURE_CHANGE", signature})
     };
 };
 
