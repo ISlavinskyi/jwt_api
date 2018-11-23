@@ -11,21 +11,21 @@ import Button from '../../Button/Button';
 class MainContent extends Component {
 
     state = {
-        token: '',
+        userToken: '',
         subStr: []
     };
 
     onTokenStringHandler = (event) => {
-        const token = event.target.value;
-        const subStr = token.split('.');
+        const userToken = event.target.value;
+        const subStr = userToken.split('.');
 
         this.setState({
-            token: token,
+            userToken: userToken,
             subStr: subStr
         });
 
         const {onRequestDecode} = this.props;
-        onRequestDecode(token);
+        onRequestDecode(userToken);
     };
 
     onDecodeChangeHandler = (event) => {
@@ -61,6 +61,7 @@ class MainContent extends Component {
                         <span>JWT string</span>
                     </div>
                     <textarea className='TokenString'
+                              value={this.props.token}
                               onChange={(event) => this.onTokenStringHandler(event)}
                     />
                 </div>
@@ -96,6 +97,7 @@ const mapStateToProps = state => {
     return {
         tokenObj: state.tokenObj,
         signature: state.signature,
+        token: state.token,
         isValid: state.isValid,
         error: state.error
     };
