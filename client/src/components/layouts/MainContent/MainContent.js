@@ -53,10 +53,11 @@ class MainContent extends Component {
                 <div className='DecodedBlock'>
                     <DecodedBlock
                         title='Algorithm & Token Type'
+                        payload={this.props.tokenObj.algorithm}
                     />
                     <DecodedBlock
                         title='Payload Data'
-                        payload={this.props.tokenObj}
+                        payload={this.props.tokenObj.decode}
                     />
                     <DecodedBlock
                         title='Signature Key'

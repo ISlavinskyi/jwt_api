@@ -3,9 +3,11 @@ const jwt = require('jsonwebtoken');
 const jwtDecode = async ({token = null}) => {
     try {
         if(token !== null) {
+            const base64 = token.split('.')[0];
+            const algorithm = JSON.parse(Buffer.from(base64, 'base64').toString());
             const decode = await jwt.decode(token);
             if(decode !== null) {
-                return decode;
+                return ({ decode, algorithm});
             } else {
                 throw new Error('wrong token');
             }
