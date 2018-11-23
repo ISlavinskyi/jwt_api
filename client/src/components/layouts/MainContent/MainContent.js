@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
+import ThumbDown from '@material-ui/icons/ThumbDown';
+import ThumbUp from '@material-ui/icons/ThumbUp';
 
 import './MainContent.css';
 
@@ -40,6 +42,18 @@ class MainContent extends Component {
 
     render() {
 
+        const verifySuccess = <div>
+            <ThumbUp
+                style={{color: '#039BE5', fontSize: '45px', marginBottom: '-10px'}}
+            /> <span style={{fontSize: '28px', color: '#039BE5'}}>Signature Verified</span>
+        </div>;
+
+        const verifyFailed = <div>
+            <ThumbDown
+                style={{color: '#FFB300', fontSize: '45px', marginBottom: '-18px'}}
+            /> <span style={{fontSize: '28px', color: '#FFB300'}}>Invalid Signature</span>
+        </div>;
+
         return (
             <div className='MainContent'>
                 <div className='EncodedBlock'>
@@ -66,7 +80,9 @@ class MainContent extends Component {
                     />
                 </div>
                 <div className='CheckBlock'>
-                    <div></div>
+                    <div className="VerifyBlock">
+                        {this.props.isValid ? verifySuccess : verifyFailed}
+                    </div>
                     <Button/>
                 </div>
 
@@ -80,6 +96,7 @@ const mapStateToProps = state => {
     return {
         tokenObj: state.tokenObj,
         signature: state.signature,
+        isValid: state.isValid,
         error: state.error
     };
 };

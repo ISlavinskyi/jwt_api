@@ -10,6 +10,7 @@ const initialState = {
     fetching: false,
     tokenObj: {},
     signature: {secret: ''},
+    isValid: true,
     error: null
 };
 
